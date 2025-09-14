@@ -4,7 +4,7 @@ import './CircleGrid.css';
 const CircleGrid = ({
   minCircleSize = 20,
   maxCircleSize = 40,
-  gapRatio = 0.5,
+  gapRatio = 0.2,
   circleStyle = {},
   customCircles = {},
 }) => {
