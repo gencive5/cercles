@@ -5,13 +5,13 @@ const CircleGrid = ({
   minCircleSize = 20,
   maxCircleSize = 40,
   gapRatio = 0.5,
-  rows = 5,
   circleStyle = {},
   customCircles = {},
 }) => {
   const gridRef = useRef(null);
   const [circleSize, setCircleSize] = useState(maxCircleSize);
   const [cols, setCols] = useState(0);
+  const [rows, setRows] = useState(0);
 
   useEffect(() => {
     const calculateLayout = () => {
@@ -21,8 +21,8 @@ const CircleGrid = ({
       const containerHeight = gridRef.current.clientHeight;
       
       // Calculate maximum possible circle size that fits both width and height
-      const widthBasedSize = (containerWidth / Math.floor(containerWidth / (maxCircleSize * (1 + gapRatio)))) * (1 + gapRatio);
-      const heightBasedSize = containerHeight / (rows * (1 + gapRatio * 0.5));
+      const widthBasedSize = containerWidth / Math.floor(containerWidth / (maxCircleSize * (1 + gapRatio)));
+      const heightBasedSize = containerHeight / Math.floor(containerHeight / (maxCircleSize * (1 + gapRatio)));
       
       const newCircleSize = Math.max(
         minCircleSize,
@@ -30,7 +30,14 @@ const CircleGrid = ({
       );
       
       setCircleSize(newCircleSize);
-      setCols(Math.floor(containerWidth / (newCircleSize * (1 + gapRatio))));
+      
+      // Calculate columns and rows based on available space
+      const gapSize = newCircleSize * gapRatio;
+      const calculatedCols = Math.floor(containerWidth / (newCircleSize + gapSize));
+      const calculatedRows = Math.floor(containerHeight / (newCircleSize + gapSize));
+      
+      setCols(calculatedCols);
+      setRows(calculatedRows);
     };
 
     calculateLayout();
@@ -38,7 +45,7 @@ const CircleGrid = ({
     if (gridRef.current) resizeObserver.observe(gridRef.current);
 
     return () => resizeObserver.disconnect();
-  }, [minCircleSize, maxCircleSize, gapRatio, rows]);
+  }, [minCircleSize, maxCircleSize, gapRatio]);
 
   const gapSize = circleSize * gapRatio;
 

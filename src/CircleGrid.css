@@ -1,6 +1,6 @@
 .circle-grid-container {
   width: 100vw;
-  height: auto;
+  height: 100vh;
   padding: 1rem;
   box-sizing: border-box;
   overflow: hidden;
@@ -9,9 +9,10 @@
 .circle-grid {
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--circle-size));
-  grid-auto-rows: var(--circle-size);
+  grid-template-rows: repeat(var(--rows), var(--circle-size));
   gap: var(--gap-size);
   justify-content: center;
+  align-content: center;
   width: 100%;
   height: 100%;
 }
@@ -40,5 +41,6 @@
 @media (max-width: 768px) {
   .circle-grid {
     grid-template-columns: repeat(auto-fit, minmax(var(--circle-size), 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(var(--circle-size), 1fr));
   }
 }
