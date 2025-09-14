@@ -31,11 +31,21 @@
 #c4 { background: #4ecdc4; }
 #c16 { background: #119e30; }
 #c17 { background: #cd4eb1; }
+#c32 { background: #7a4ecd; }
+#c33 { background: #a7cd4e; }
+#c49 { background: #cd7d4e; }
+#c51 { background: #cd4e5f; }
+
 
 /* Hover effects */
 #c1:hover, #c4:hover, #c16:hover, #c17:hover {
   transform: scale(1.2, 0.8);
 }
+
+#c32:hover, #c33:hover, #c49:hover, #c51:hover {
+  transform: scale(0.8, 1.2);
+}
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
