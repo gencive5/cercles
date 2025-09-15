@@ -33,16 +33,6 @@
 }
 
 
-@font-face {
-  font-family: 'UnormativeFraktur';
-  src: local('UnormativeFraktur'),
-       url('./fonts/UnormativeFraktur.woff2') format('woff2'),
-       url('./fonts/UnormativeFraktur.woff') format('woff');
-  font-display: swap;
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* Ensure the container doesn't create extra scrollbars */
 .container {
   width: 100%;
@@ -51,44 +41,7 @@
   position: relative;
 }
 
-.overlay-text {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-  pointer-events: none;
-}
 
-.text-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem; /* Adjust spacing between lines */
-  padding-left: 1rem;
-  padding-right: 2rem;
-}
-
-/* Add this to your existing CSS */
-@media (max-width: 768px) {
-  .overlay-text {
-    top: auto; /* Remove the top: 0 positioning */
-    bottom: 2rem; /* Position from bottom of viewport */
-    left: 0;
-    width: 100%;
-    z-index: 10;
-    pointer-events: none;
-  }
-  
-  .text-column {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-.content-wrapper {
-  position: relative;
-  z-index: 1; /* Lower than overlay-text */
-}
 
 /* Remove any conflicting overflow properties */
 html, body, #root {
@@ -97,21 +50,6 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-
-canvas {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-@media (max-width: 768px) {
-
-  
-  canvas {
-    width: 100% !important;
-  }
 }
 
 
