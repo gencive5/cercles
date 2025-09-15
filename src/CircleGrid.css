@@ -41,6 +41,8 @@
 #c69 { background: #cd4e4e; }
 
 
+
+
 /* Hover effects */
 #c1:hover, #c4:hover, #c16:hover, #c17:hover {
   transform: scale(1.2, 0.8);
@@ -48,6 +50,10 @@
 
 #c32:hover, #c33:hover, #c49:hover, #c51:hover {
   transform: scale(0.8, 1.2);
+}
+
+#c62:hover, #c67:hover, #c68:hover, #c69:hover {
+  transform: skew(30deg, 20deg);
 }
 
 
