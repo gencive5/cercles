@@ -48,6 +48,10 @@
 #c88 { background: #ff989e; }
 #c91 { background: #cd4e4e; }
 
+#c109 { background: #7b48be; }
+#c110 { background: #4aa54e; }
+#c111 { background: #eb0bcd; }
+
 
 
 
@@ -68,6 +72,9 @@
   transform: skew(20deg, 30deg);
 }
 
+#c109:hover, #c110:hover, #c111:hover {
+  transform: scale(0.5, 0.5);
+}
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
