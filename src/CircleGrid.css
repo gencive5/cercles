@@ -52,6 +52,9 @@
 #c110 { background: #4aa54e; }
 #c111 { background: #eb0bcd; }
 
+#c130 { background: #4854be; }
+#c131 { background: #82a54a; }
+#c132 { background: #e7eb0b; }
 
 
 
@@ -75,6 +78,11 @@
 #c109:hover, #c110:hover, #c111:hover {
   transform: scale(0.5, 0.5);
 }
+
+#c130:hover, #c131:hover, #c132:hover {
+  transform: scale(2, 0.5); transform: rotate(0.7turn);
+}
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
