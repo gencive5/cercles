@@ -21,8 +21,6 @@
   width: var(--circle-size);
   height: var(--circle-size);
   border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 2px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
 }
 
@@ -94,5 +92,6 @@
   .circle-grid-container {
     width: 100vw;
     height: 100svh;
+    height: 100vh;
   }
 }
