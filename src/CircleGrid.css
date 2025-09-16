@@ -21,6 +21,7 @@
   width: var(--circle-size);
   height: var(--circle-size);
   border-radius: 50%;
+  background: white;
   transition: all 0.3s ease;
 }
 
