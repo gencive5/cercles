@@ -12,6 +12,7 @@ const CircleGrid = ({
   const [circleSize, setCircleSize] = useState(maxCircleSize);
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
+  const [activeCircle, setActiveCircle] = useState(null);
 
   useEffect(() => {
     const calculateLayout = () => {
@@ -47,6 +48,47 @@ const CircleGrid = ({
     return () => resizeObserver.disconnect();
   }, [minCircleSize, maxCircleSize, gapRatio]);
 
+  // Handle touch events
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (element && element.classList.contains('circle')) {
+      setActiveCircle(element.id);
+      element.classList.add('active');
+    }
+  };
+
+  const handleTouchMove = (e) => {
+    const touch = e.touches[0];
+    const element = document.elementFromPoint(touch.clientX, touch.clientY);
+    
+    // Remove active class from previously active circle
+    if (activeCircle) {
+      const prevElement = document.getElementById(activeCircle);
+      if (prevElement && prevElement !== element) {
+        prevElement.classList.remove('active');
+      }
+    }
+    
+    // Add active class to new element if it's a circle
+    if (element && element.classList.contains('circle')) {
+      setActiveCircle(element.id);
+      element.classList.add('active');
+    } else {
+      setActiveCircle(null);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (activeCircle) {
+      const element = document.getElementById(activeCircle);
+      if (element) {
+        element.classList.remove('active');
+      }
+      setActiveCircle(null);
+    }
+  };
+
   const gapSize = circleSize * gapRatio;
 
   return (
@@ -59,6 +101,10 @@ const CircleGrid = ({
         '--rows': rows,
         '--cols': cols,
       }}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
     >
       <div className="circle-grid">
         {Array.from({ length: rows * cols }).map((_, index) => {
