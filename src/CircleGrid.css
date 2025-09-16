@@ -90,4 +90,9 @@
     grid-template-columns: repeat(auto-fit, minmax(var(--circle-size), 1fr));
     grid-template-rows: repeat(auto-fit, minmax(var(--circle-size), 1fr));
   }
+
+  .circle-grid-container {
+    width: 100vw;
+    height: 100svh;
+  }
 }
