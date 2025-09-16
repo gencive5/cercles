@@ -82,6 +82,11 @@
   transform: scale(2, 0.5); transform: rotate(0.7turn);
 }
 
+/* Touch effects */
+#c1:active, #c4:active, #c16:active, #c17:active {
+  transform: scale(1.2, 0.8);
+}
+
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
