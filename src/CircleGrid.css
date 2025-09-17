@@ -94,7 +94,7 @@
 }
 
 #c130:hover, #c131:hover, #c132:hover {
-  transform: scale(2, 0.5); transform: rotate(0.7turn);
+  transform: scale(1.2, 0.4);
 }
 
 
@@ -124,7 +124,7 @@
 }
 
 #c130.active, #c131.active, #c132.active {
-  transform: scale(2, 0.5) rotate(0.7turn);
+  transform: scale(1.2, 0.4);
 }
 
 
