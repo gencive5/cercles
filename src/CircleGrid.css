@@ -60,6 +60,7 @@
 /* Hover effects */
 #c1:hover, #c4:hover, #c16:hover, #c17:hover {
   transform: scale(1.2, 0.8);
+ 
 }
 
 #c32:hover, #c33:hover, #c49:hover, #c51:hover {
@@ -87,14 +88,17 @@
 /* Touch effects for all circles */
 #c1.active, #c4.active, #c16.active, #c17.active {
   transform: scale(1.2, 0.8);
+  transition-delay: 0.6s;
 }
 
 #c32.active, #c33.active, #c49.active, #c51.active {
   transform: scale(0.8, 1.2);
+  transition-delay: 0.8s;
 }
 
 #c62.active, #c67.active, #c68.active, #c69.active {
   transform: skew(30deg, 20deg);
+  transition-delay: 0.9s;
 }
 
 #c71.active, #c82.active, #c84.active, #c88.active, #c91.active {
