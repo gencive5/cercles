@@ -83,14 +83,9 @@ const CircleGrid = ({
     if (activeCircle) {
       const element = document.getElementById(activeCircle);
       if (element) {
-        // Keep the circle active for a little longer before resetting
-        setTimeout(() => {
-          element.classList.remove('active');
-          setActiveCircle(null);
-        }, 3000); // delay in ms (adjust to taste: 200–500ms feels nice)
-      } else {
-        setActiveCircle(null);
+        element.classList.remove('active');
       }
+      setActiveCircle(null);
     }
   };
 
