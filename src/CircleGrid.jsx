@@ -87,7 +87,7 @@ const CircleGrid = ({
         setTimeout(() => {
           element.classList.remove('active');
           setActiveCircle(null);
-        }, 300); // delay in ms (adjust to taste: 200–500ms feels nice)
+        }, 1000); // delay in ms (adjust to taste: 200–500ms feels nice)
       } else {
         setActiveCircle(null);
       }
