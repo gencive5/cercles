@@ -8,20 +8,28 @@ const CircleGrid = ({
   mobileMaxCircleSize = 24,
   gapRatio = 0.2,
   circleStyle = {},
-  customCircles = {},
+  customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
+  lingerMs = 1200,     // default linger time (ms)
 }) => {
   const gridRef = useRef(null);
   const [circleSize, setCircleSize] = useState(maxCircleSize);
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
-  const [activeCircle, setActiveCircle] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  // Active ids stored as a Set so multiple circles can linger at once.
+  const [activeIds, setActiveIds] = useState(() => new Set());
+  const activeIdsRef = useRef(activeIds);
+  useEffect(() => { activeIdsRef.current = activeIds; }, [activeIds]);
 
+  // track the currently touched circle id (the one under the finger right now)
+  const currentRef = useRef(null);
+
+  // scheduled removal timeouts, map id -> timeoutId
+  const scheduledRef = useRef({});
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -29,86 +37,137 @@ const CircleGrid = ({
   useEffect(() => {
     const calculateLayout = () => {
       if (!gridRef.current) return;
-      
+
       const containerWidth = gridRef.current.clientWidth;
       const containerHeight = gridRef.current.clientHeight;
-      
-      // Use mobile sizes if on mobile
-      const effectiveMinSize = isMobile ? mobileMinCircleSize : minCircleSize;
-      const effectiveMaxSize = isMobile ? mobileMaxCircleSize : maxCircleSize;
-      
-      // Calculate maximum possible circle size that fits both width and height
-      const widthBasedSize = containerWidth / Math.floor(containerWidth / (effectiveMaxSize * (1 + gapRatio)));
-      const heightBasedSize = containerHeight / Math.floor(containerHeight / (effectiveMaxSize * (1 + gapRatio)));
-      
-      const newCircleSize = Math.max(
-        effectiveMinSize,
-        Math.min(effectiveMaxSize, widthBasedSize, heightBasedSize)
-      );
-      
+
+      const effectiveMin = isMobile ? mobileMinCircleSize : minCircleSize;
+      const effectiveMax = isMobile ? mobileMaxCircleSize : maxCircleSize;
+
+      // defensively avoid division by zero: floor at least 1
+      const widthSlots = Math.max(1, Math.floor(containerWidth / (effectiveMax * (1 + gapRatio))));
+      const heightSlots = Math.max(1, Math.floor(containerHeight / (effectiveMax * (1 + gapRatio))));
+
+      const widthBasedSize = containerWidth / widthSlots;
+      const heightBasedSize = containerHeight / heightSlots;
+
+      const newCircleSize = Math.max(effectiveMin, Math.min(effectiveMax, widthBasedSize, heightBasedSize));
       setCircleSize(newCircleSize);
-      
-      // Calculate columns and rows based on available space
+
       const gapSize = newCircleSize * gapRatio;
-      const calculatedCols = Math.floor(containerWidth / (newCircleSize + gapSize));
-      const calculatedRows = Math.floor(containerHeight / (newCircleSize + gapSize));
-      
+      const calculatedCols = Math.max(0, Math.floor(containerWidth / (newCircleSize + gapSize)));
+      const calculatedRows = Math.max(0, Math.floor(containerHeight / (newCircleSize + gapSize)));
+
       setCols(calculatedCols);
       setRows(calculatedRows);
     };
 
     calculateLayout();
-    const resizeObserver = new ResizeObserver(calculateLayout);
-    if (gridRef.current) resizeObserver.observe(gridRef.current);
+    const ro = new ResizeObserver(calculateLayout);
+    if (gridRef.current) ro.observe(gridRef.current);
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      ro.disconnect();
+    };
   }, [minCircleSize, maxCircleSize, mobileMinCircleSize, mobileMaxCircleSize, gapRatio, isMobile]);
 
-  // Handle touch events
+  // --- helpers for active state & scheduling ---
+  const addActive = (id) => {
+    setActiveIds(prev => {
+      const s = new Set(prev);
+      s.add(id);
+      return s;
+    });
+  };
+
+  const removeActiveImmediate = (id) => {
+    setActiveIds(prev => {
+      const s = new Set(prev);
+      s.delete(id);
+      return s;
+    });
+  };
+
+  const clearScheduled = (id) => {
+    const t = scheduledRef.current[id];
+    if (t) {
+      clearTimeout(t);
+      delete scheduledRef.current[id];
+    }
+  };
+
+  const scheduleRemove = (id, delay) => {
+    clearScheduled(id);
+    scheduledRef.current[id] = setTimeout(() => {
+      removeActiveImmediate(id);
+      delete scheduledRef.current[id];
+    }, delay);
+  };
+
+  const getLinger = (id) => {
+    const cfg = customCircles?.[id];
+    if (cfg && typeof cfg.linger === 'number') return cfg.linger;
+    return lingerMs;
+  };
+
+  // --- touch handlers ---
   const handleTouchStart = (e) => {
-    const touch = e.touches[0];
-    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    if (element && element.classList.contains('circle')) {
-      setActiveCircle(element.id);
-      element.classList.add('active');
+    const touch = e.touches && e.touches[0];
+    if (!touch) return;
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (el && el.classList.contains('circle')) {
+      const id = el.id;
+      clearScheduled(id);
+      addActive(id);
+      currentRef.current = id;
     }
   };
 
   const handleTouchMove = (e) => {
-    const touch = e.touches[0];
-    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    
-    // Remove active class from previously active circle
-    if (activeCircle) {
-      const prevElement = document.getElementById(activeCircle);
-      if (prevElement && prevElement !== element) {
-        prevElement.classList.remove('active');
+    const touch = e.touches && e.touches[0];
+    if (!touch) return;
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    if (el && el.classList.contains('circle')) {
+      const id = el.id;
+      const prev = currentRef.current;
+      if (prev && prev !== id) {
+        // schedule previous to linger (don't remove immediately)
+        scheduleRemove(prev, getLinger(prev));
       }
-    }
-    
-    // Add active class to new element if it's a circle
-    if (element && element.classList.contains('circle')) {
-      setActiveCircle(element.id);
-      element.classList.add('active');
+      clearScheduled(id); // cancel removal if it was scheduled
+      addActive(id);
+      currentRef.current = id;
     } else {
-      setActiveCircle(null);
+      // not over any circle: schedule removal of current (so it lingers)
+      const prev = currentRef.current;
+      if (prev) {
+        scheduleRemove(prev, getLinger(prev));
+        currentRef.current = null;
+      }
     }
   };
 
   const handleTouchEnd = () => {
-    if (activeCircle) {
-      const element = document.getElementById(activeCircle);
-      if (element) {
-        element.classList.remove('active');
-      }
-      setActiveCircle(null);
+    const current = currentRef.current;
+    if (current) {
+      scheduleRemove(current, getLinger(current));
+      currentRef.current = null;
     }
   };
+
+  // cleanup scheduled timers on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(scheduledRef.current).forEach(clearTimeout);
+      scheduledRef.current = {};
+    };
+  }, []);
 
   const gapSize = circleSize * gapRatio;
 
   return (
-    <div 
+    <div
       ref={gridRef}
       className="circle-grid-container"
       style={{
@@ -125,16 +184,18 @@ const CircleGrid = ({
       <div className="circle-grid">
         {Array.from({ length: rows * cols }).map((_, index) => {
           const id = `c${index + 1}`;
+          const custom = customCircles[id] || {};
+          const customStyle = custom.style || {};
           return (
             <div
               key={id}
               id={id}
-              className="circle"
+              className={`circle ${activeIds.has(id) ? 'active' : ''}`}
               style={{
                 width: `${circleSize}px`,
                 height: `${circleSize}px`,
                 ...circleStyle,
-                ...(customCircles[id] || {})
+                ...customStyle,
               }}
             />
           );
