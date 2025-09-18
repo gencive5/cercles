@@ -4,6 +4,8 @@ import './CircleGrid.css';
 const CircleGrid = ({
   minCircleSize = 20,
   maxCircleSize = 40,
+  mobileMinCircleSize = 12,
+  mobileMaxCircleSize = 24,
   gapRatio = 0.2,
   circleStyle = {},
   customCircles = {},
@@ -13,6 +15,16 @@ const CircleGrid = ({
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
   const [activeCircle, setActiveCircle] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const calculateLayout = () => {
@@ -21,13 +33,17 @@ const CircleGrid = ({
       const containerWidth = gridRef.current.clientWidth;
       const containerHeight = gridRef.current.clientHeight;
       
+      // Use mobile sizes if on mobile
+      const effectiveMinSize = isMobile ? mobileMinCircleSize : minCircleSize;
+      const effectiveMaxSize = isMobile ? mobileMaxCircleSize : maxCircleSize;
+      
       // Calculate maximum possible circle size that fits both width and height
-      const widthBasedSize = containerWidth / Math.floor(containerWidth / (maxCircleSize * (1 + gapRatio)));
-      const heightBasedSize = containerHeight / Math.floor(containerHeight / (maxCircleSize * (1 + gapRatio)));
+      const widthBasedSize = containerWidth / Math.floor(containerWidth / (effectiveMaxSize * (1 + gapRatio)));
+      const heightBasedSize = containerHeight / Math.floor(containerHeight / (effectiveMaxSize * (1 + gapRatio)));
       
       const newCircleSize = Math.max(
-        minCircleSize,
-        Math.min(maxCircleSize, widthBasedSize, heightBasedSize)
+        effectiveMinSize,
+        Math.min(effectiveMaxSize, widthBasedSize, heightBasedSize)
       );
       
       setCircleSize(newCircleSize);
@@ -46,7 +62,7 @@ const CircleGrid = ({
     if (gridRef.current) resizeObserver.observe(gridRef.current);
 
     return () => resizeObserver.disconnect();
-  }, [minCircleSize, maxCircleSize, gapRatio]);
+  }, [minCircleSize, maxCircleSize, mobileMinCircleSize, mobileMaxCircleSize, gapRatio, isMobile]);
 
   // Handle touch events
   const handleTouchStart = (e) => {
@@ -88,7 +104,6 @@ const CircleGrid = ({
       setActiveCircle(null);
     }
   };
-
 
   const gapSize = circleSize * gapRatio;
 

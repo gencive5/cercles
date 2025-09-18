@@ -16,7 +16,7 @@
   width: 100%;
   height: 100%;
   
- -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -31,7 +31,7 @@
   background: white;
   transition: all 0.3s ease;
 
-   -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -69,12 +69,9 @@
 #c131 { background: #82a54a; }
 #c132 { background: #e7eb0b; }
 
-
-
 /* Hover effects */
 #c1:hover, #c4:hover, #c16:hover, #c17:hover {
   transform: scale(1.2, 0.8);
- 
 }
 
 #c32:hover, #c33:hover, #c49:hover, #c51:hover {
@@ -97,22 +94,17 @@
   transform: scale(1.2, 0.4);
 }
 
-
-
 /* Touch effects for all circles */
 #c1.active, #c4.active, #c16.active, #c17.active {
   transform: scale(1.2, 0.8);
- 
 }
 
 #c32.active, #c33.active, #c49.active, #c51.active {
   transform: scale(0.8, 1.2);
-  
 }
 
 #c62.active, #c67.active, #c68.active, #c69.active {
   transform: skew(30deg, 20deg);
-  
 }
 
 #c71.active, #c82.active, #c84.active, #c88.active, #c91.active {
@@ -127,19 +119,11 @@
   transform: scale(1.2, 0.4);
 }
 
-
-
-
 /* Mobile responsiveness */
 @media (max-width: 768px) {
-  .circle-grid {
-    grid-template-columns: repeat(auto-fit, minmax(var(--circle-size), 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(var(--circle-size), 1fr));
-  }
-
   .circle-grid-container {
     width: 100vw;
     height: 100svh;
- 
+    padding: 0.5rem;
   }
 }
