@@ -127,3 +127,45 @@
     padding: 0.5rem;
   }
 }
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: transparent;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 50%;
+  height: 50%;
+  overflow: hidden;
+  position: relative;
+  color: white;
+   font-size: 5rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+/* Style for the last circle */
+.last-circle {
+  background: #ffcc00 !important; /* Give it a distinct color */
+  box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+}

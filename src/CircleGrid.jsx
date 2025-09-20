@@ -10,12 +10,15 @@ const CircleGrid = ({
   circleStyle = {},
   customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
   lingerMs = 1200,     // default linger time (ms)
+  modalContent = "https://www.moma.org/collection/works/84759", // Content for the modal
 }) => {
   const gridRef = useRef(null);
   const [circleSize, setCircleSize] = useState(maxCircleSize);
   const [cols, setCols] = useState(0);
   const [rows, setRows] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [showModal, setShowModal] = useState(false);
+  const [lastCircleId, setLastCircleId] = useState('');
 
   // Active ids stored as a Set so multiple circles can linger at once.
   const [activeIds, setActiveIds] = useState(() => new Set());
@@ -60,6 +63,10 @@ const CircleGrid = ({
 
       setCols(calculatedCols);
       setRows(calculatedRows);
+      
+      // Calculate the last circle ID
+      const lastId = `c${calculatedCols * calculatedRows}`;
+      setLastCircleId(lastId);
     };
 
     calculateLayout();
@@ -110,6 +117,11 @@ const CircleGrid = ({
     return lingerMs;
   };
 
+  // Handle click on the last circle
+  const handleLastCircleClick = () => {
+    setShowModal(true);
+  };
+
   // --- touch handlers ---
   const handleTouchStart = (e) => {
     const touch = e.touches && e.touches[0];
@@ -117,6 +129,10 @@ const CircleGrid = ({
     const el = document.elementFromPoint(touch.clientX, touch.clientY);
     if (el && el.classList.contains('circle')) {
       const id = el.id;
+      
+      // If it's the last circle, don't activate the normal touch behavior
+      if (id === lastCircleId) return;
+      
       clearScheduled(id);
       addActive(id);
       currentRef.current = id;
@@ -130,6 +146,10 @@ const CircleGrid = ({
 
     if (el && el.classList.contains('circle')) {
       const id = el.id;
+      
+      // If it's the last circle, don't activate the normal touch behavior
+      if (id === lastCircleId) return;
+      
       const prev = currentRef.current;
       if (prev && prev !== id) {
         // schedule previous to linger (don't remove immediately)
@@ -148,11 +168,27 @@ const CircleGrid = ({
     }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
+    const touch = e.changedTouches && e.changedTouches[0];
+    if (!touch) return;
+    
+    const el = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (el && el.id === lastCircleId) {
+      handleLastCircleClick();
+      return;
+    }
+    
     const current = currentRef.current;
     if (current) {
       scheduleRemove(current, getLinger(current));
       currentRef.current = null;
+    }
+  };
+
+  // Handle click (for desktop)
+  const handleClick = (e) => {
+    if (e.target.id === lastCircleId) {
+      handleLastCircleClick();
     }
   };
 
@@ -167,41 +203,57 @@ const CircleGrid = ({
   const gapSize = circleSize * gapRatio;
 
   return (
-    <div
-      ref={gridRef}
-      className="circle-grid-container"
-      style={{
-        '--circle-size': `${circleSize}px`,
-        '--gap-size': `${gapSize}px`,
-        '--rows': rows,
-        '--cols': cols,
-      }}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      onTouchCancel={handleTouchEnd}
-    >
-      <div className="circle-grid">
-        {Array.from({ length: rows * cols }).map((_, index) => {
-          const id = `c${index + 1}`;
-          const custom = customCircles[id] || {};
-          const customStyle = custom.style || {};
-          return (
-            <div
-              key={id}
-              id={id}
-              className={`circle ${activeIds.has(id) ? 'active' : ''}`}
-              style={{
-                width: `${circleSize}px`,
-                height: `${circleSize}px`,
-                ...circleStyle,
-                ...customStyle,
-              }}
-            />
-          );
-        })}
+    <>
+      <div
+        ref={gridRef}
+        className="circle-grid-container"
+        style={{
+          '--circle-size': `${circleSize}px`,
+          '--gap-size': `${gapSize}px`,
+          '--rows': rows,
+          '--cols': cols,
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
+        onClick={handleClick}
+      >
+        <div className="circle-grid">
+          {Array.from({ length: rows * cols }).map((_, index) => {
+            const id = `c${index + 1}`;
+            const custom = customCircles[id] || {};
+            const customStyle = custom.style || {};
+            const isLastCircle = id === lastCircleId;
+            
+            return (
+              <div
+                key={id}
+                id={id}
+                className={`circle ${activeIds.has(id) ? 'active' : ''} ${isLastCircle ? 'last-circle' : ''}`}
+                style={{
+                  width: `${circleSize}px`,
+                  height: `${circleSize}px`,
+                  ...circleStyle,
+                  ...customStyle,
+                  cursor: isLastCircle ? 'pointer' : 'default',
+                }}
+              />
+            );
+          })}
+        </div>
       </div>
-    </div>
+      
+      {/* Modal */}
+      {showModal && (
+        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
+            <div>{modalContent}</div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
