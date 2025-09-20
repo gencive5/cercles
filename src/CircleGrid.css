@@ -69,6 +69,8 @@
 #c131 { background: #82a54a; }
 #c132 { background: #e7eb0b; }
 
+#c144 { background: #0b74eb; }
+
 /* Hover effects */
 #c1:hover, #c4:hover, #c16:hover, #c17:hover {
   transform: scale(1.2, 0.8);
@@ -119,6 +121,11 @@
   transform: scale(1.2, 0.4);
 }
 
+#c144:hover {
+  border-radius: 0; 
+  transform: scale(1.1); 
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .circle-grid-container {
@@ -146,8 +153,8 @@
   background: transparent;
   padding: 2rem;
   border-radius: 8px;
-  width: 50%;
-  height: 50%;
+  width: 90%;
+  height: 90%;
   overflow: hidden;
   position: relative;
   color: white;
