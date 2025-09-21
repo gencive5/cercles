@@ -40,17 +40,30 @@
 }
 
 /* Individual circle styling */
-#c1 { background: #ff6b6b; }
-#c4 { background: #4ecdc4; }
-#c16 { background: #119e30; }
-#c17 { background: #cd4eb1; }
+#c33 { background: #ff6b6b; }
+#c34 { background: #4ecdc4; }
+#c35 { background: #0b7770; }
+#c36 { background: #119e30; }
+#c37 { background: #cd4eb1; }
 
-#c32 { background: #7a4ecd; }
-#c33 { background: #a7cd4e; }
-#c49 { background: #cd7d4e; }
-#c51 { background: #cd4e5f; }
+#c43 { background: #ff6b6b; }
+#c44 { background: #4ecdc4; }
+#c45 { background: #0b7770; }
+#c46 { background: #119e30; }
+#c47 { background: #cd4eb1; }
+
+#c48 { background: #ff6b6b; }
+#c49 { background: #ff6b6b; }
+#c50 { background: #ff6b6b; }
+#c51 { background: #ff6b6b; }
+#c52 { background: #ff6b6b; }
+
+#c53 { background: #7a4ecd; }
+
+#c59 { background: #cd7d4e; }
 
 #c62 { background: #4e50cd; }
+
 #c67 { background: #4ecda7; }
 #c68 { background: #b44ecd; }
 #c69 { background: #cd4e4e; }
@@ -72,15 +85,31 @@
 #c144 { background: #0b74eb; }
 
 /* Hover effects */
-#c1:hover, #c4:hover, #c16:hover, #c17:hover {
+#c33:hover, #c37:hover, #c43:hover, #c47:hover {
+  transform: scale(0.9, 1.2);
+}
+
+#c34:hover, #c36:hover, #c44:hover, #c46:hover {
+  transform: scale(0.7, 1.2);
+}
+
+#c35:hover, #c45:hover, #c53:hover {
+  transform: scale(0.5, 1.2);
+}
+
+#c48:hover, #c49:hover, #c50:hover, #c51:hover, #c52:hover {
+  transform: scale(1.2, 1.2);
+}
+
+#c59:hover {
   transform: scale(1.2, 0.8);
 }
 
-#c32:hover, #c33:hover, #c49:hover, #c51:hover {
-  transform: scale(0.8, 1.2);
+#c62:hover {
+  transform: scale(0.5, 0.5);
 }
 
-#c62:hover, #c67:hover, #c68:hover, #c69:hover {
+#c67:hover, #c68:hover, #c69:hover {
   transform: skew(30deg, 20deg);
 }
 
@@ -173,6 +202,6 @@
 
 /* Style for the last circle */
 .last-circle {
-  background: #ffcc00 !important; /* Give it a distinct color */
-  box-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+  background: #ffcc00 !important; 
+  
 }
