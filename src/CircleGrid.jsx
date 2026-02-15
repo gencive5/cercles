@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from 'react';
 import './CircleGrid.css';
 
 const CircleGrid = ({
-  minCircleSize = 20,
-  maxCircleSize = 40,
-  mobileMinCircleSize = 12,
-  mobileMaxCircleSize = 24,
+  minCircleSize = 40,
+  maxCircleSize = 50,
+  mobileMinCircleSize = 20,
+  mobileMaxCircleSize = 25,
   gapRatio = 0.2,
   circleStyle = {},
   customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
@@ -19,6 +19,7 @@ const CircleGrid = ({
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const [showModal, setShowModal] = useState(false);
   const [lastCircleId, setLastCircleId] = useState('');
+  const [modalLetters, setModalLetters] = useState([]);
 
   // Active ids stored as a Set so multiple circles can linger at once.
   const [activeIds, setActiveIds] = useState(() => new Set());
@@ -77,6 +78,18 @@ const CircleGrid = ({
       ro.disconnect();
     };
   }, [minCircleSize, maxCircleSize, mobileMinCircleSize, mobileMaxCircleSize, gapRatio, isMobile]);
+
+  // Prepare letters for modal text when modal opens
+  useEffect(() => {
+    if (showModal) {
+      // Split into characters (including spaces)
+      const letters = modalContent.split('').map((char, index) => ({
+        char: char,
+        id: index
+      }));
+      setModalLetters(letters);
+    }
+  }, [showModal, modalContent]);
 
   // --- helpers for active state & scheduling ---
   const addActive = (id) => {
@@ -238,19 +251,22 @@ const CircleGrid = ({
                   ...customStyle,
                   cursor: isLastCircle ? 'pointer' : 'default',
                 }}
-              />
+              >
+                {showModal && modalLetters[index] && (
+                  <span className="circle-letter">
+                    {modalLetters[index].char}
+                  </span>
+                )}
+              </div>
             );
           })}
         </div>
       </div>
       
-      {/* Modal */}
+      {/* Modal - now just a simple overlay */}
       {showModal && (
         <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
-            <div>{modalContent}</div>
-          </div>
+          <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
         </div>
       )}
     </>

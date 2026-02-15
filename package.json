@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "@vercel/node": "^2.3.0",
     "dotenv": "^16.5.0",
     "framer-motion": "^12.10.5",
     "nodemailer": "^7.0.3",

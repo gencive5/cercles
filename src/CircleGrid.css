@@ -30,6 +30,10 @@
   border-radius: 50%;
   background: white;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -37,6 +41,22 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+/* Letter inside circle */
+.circle-letter {
+  font-size: calc(var(--circle-size) * 0.4);
+  font-weight: bold;
+  color: #000;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+  text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+  z-index: 2;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Individual circle styling */
@@ -125,6 +145,11 @@
   transform: scale(1.2, 0.4);
 }
 
+#c144:hover {
+  border-radius: 0; 
+  transform: scale(1.1); 
+}
+
 /* Touch effects for all circles */
 #c1.active, #c4.active, #c16.active, #c17.active {
   transform: scale(1.2, 0.8);
@@ -150,11 +175,6 @@
   transform: scale(1.2, 0.4);
 }
 
-#c144:hover {
-  border-radius: 0; 
-  transform: scale(1.1); 
-}
-
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .circle-grid-container {
@@ -162,46 +182,39 @@
     height: 100svh;
     padding: 0.5rem;
   }
+  
+  .circle-letter {
+    font-size: calc(var(--circle-size) * 0.35);
+  }
 }
 
-/* Modal styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
 
-.modal-content {
-  background: transparent;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  height: 90%;
-  overflow: hidden;
-  position: relative;
-  color: white;
-   font-size: 5rem;
-}
 
 .modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: white;
   border: none;
-  font-size: 5rem;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
   cursor: pointer;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
+  background: #f0f0f0;
 }
 
 /* Style for the last circle */
 .last-circle {
   background: #ffcc00 !important; 
-  
 }
