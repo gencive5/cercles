@@ -4,12 +4,12 @@ import './CircleGrid.css';
 const CircleGrid = ({
   minCircleSize = 40,
   maxCircleSize = 50,
-  mobileMinCircleSize = 20,
-  mobileMaxCircleSize = 25,
+  mobileMinCircleSize = 25,
+  mobileMaxCircleSize = 30,
   gapRatio = 0.2,
   circleStyle = {},
   customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
-  lingerMs = 1200,     // default linger time (ms)
+  lingerMs = 1400,     // default linger time (ms)
   modalContent = "Inspired from Betelgeuse from the portfolio Cinétique III, 1959 - Victor Vasarely", // Content for the modal
 }) => {
   const gridRef = useRef(null);
