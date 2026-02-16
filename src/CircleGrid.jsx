@@ -4,12 +4,12 @@ import './CircleGrid.css';
 const CircleGrid = ({
   minCircleSize = 40,
   maxCircleSize = 50,
-  mobileMinCircleSize = 25,
-  mobileMaxCircleSize = 30,
+  mobileMinCircleSize = 20,
+  mobileMaxCircleSize = 25,
   gapRatio = 0.2,
   circleStyle = {},
   customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
-  lingerMs = 1400,     // default linger time (ms)
+  lingerMs = 1200,     // default linger time (ms)
   modalContent = "Inspired from Betelgeuse from the portfolio Cinétique III, 1959 - Victor Vasarely", // Content for the modal
 }) => {
   const gridRef = useRef(null);
@@ -130,9 +130,9 @@ const CircleGrid = ({
     return lingerMs;
   };
 
-  // Handle click on the last circle
+  // Toggle modal on last circle click
   const handleLastCircleClick = () => {
-    setShowModal(true);
+    setShowModal(!showModal);
   };
 
   // --- touch handlers ---
@@ -252,10 +252,18 @@ const CircleGrid = ({
                   cursor: isLastCircle ? 'pointer' : 'default',
                 }}
               >
-                {showModal && modalLetters[index] && (
-                  <span className="circle-letter">
-                    {modalLetters[index].char}
+                {isLastCircle ? (
+                  // Show "i" when modal is closed, "×" when modal is open
+                  <span className="circle-letter toggle-icon">
+                    {showModal ? '×' : 'i'}
                   </span>
+                ) : (
+                  // Show letters from modal content when modal is open
+                  showModal && modalLetters[index] && (
+                    <span className="circle-letter">
+                      {modalLetters[index].char}
+                    </span>
+                  )
                 )}
               </div>
             );
@@ -263,11 +271,9 @@ const CircleGrid = ({
         </div>
       </div>
       
-      {/* Modal - now just a simple overlay */}
+      {/* Modal - simple overlay without close button (now in the circle) */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
-          <button className="modal-close" onClick={() => setShowModal(false)}>×</button>
-        </div>
+        <div className="modal-overlay" onClick={() => setShowModal(false)} />
       )}
     </>
   );

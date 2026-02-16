@@ -218,3 +218,14 @@
 .last-circle {
   background: #ffcc00 !important; 
 }
+
+/* Last circle hover effect */
+.last-circle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+/* Optional: different color for the last circle when modal is open */
+.last-circle:has(.toggle-icon:contains('×')) {
+  background: #ff9900 !important;
+}
