@@ -2,8 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import './CircleGrid.css';
 
 const CircleGrid = ({
-  minCircleSize = 40,
-  maxCircleSize = 50,
+  minCircleSize = 45,
+  maxCircleSize = 45,
   mobileMinCircleSize = 20,
   mobileMaxCircleSize = 25,
   gapRatio = 0.2,
