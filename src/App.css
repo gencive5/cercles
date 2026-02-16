@@ -1,11 +1,13 @@
 @font-face {
-  font-family: 'Univers';
-  src: url('./fonts/Univers-UltraCondensed.woff2') format('woff2'),
-       url('./fonts/Univers-UltraCondensed.woff') format('woff');
+  font-family: 'Breite';
+  src: url('./fonts/breite.woff') format('woff2'),
+       url('./fonts/breite.woff') format('woff');
   font-display: swap;
   font-weight: normal;
   font-style: normal;
 }
+
+
 
 @font-face {
   font-family: 'Microsoft';
@@ -53,12 +55,4 @@ html, body, #root {
 }
 
 
-.footer {
-  position:relative;
-  float: right;
-  color:white; 
-  font-family: 'Microsoft', sans-serif;
-  font-size: 3rem;
-  padding: 20px;
-}
 
