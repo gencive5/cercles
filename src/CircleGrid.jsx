@@ -131,7 +131,8 @@ const CircleGrid = ({
   };
 
   // Toggle modal on last circle click
-  const handleLastCircleClick = () => {
+  const handleLastCircleClick = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
     setShowModal(!showModal);
   };
 
@@ -187,7 +188,7 @@ const CircleGrid = ({
     
     const el = document.elementFromPoint(touch.clientX, touch.clientY);
     if (el && el.id === lastCircleId) {
-      handleLastCircleClick();
+      handleLastCircleClick(e);
       return;
     }
     
@@ -201,8 +202,13 @@ const CircleGrid = ({
   // Handle click (for desktop)
   const handleClick = (e) => {
     if (e.target.id === lastCircleId) {
-      handleLastCircleClick();
+      handleLastCircleClick(e);
     }
+  };
+
+  // Handle modal overlay click
+  const handleOverlayClick = () => {
+    setShowModal(false);
   };
 
   // cleanup scheduled timers on unmount
@@ -243,7 +249,7 @@ const CircleGrid = ({
               <div
                 key={id}
                 id={id}
-                className={`circle ${activeIds.has(id) ? 'active' : ''} ${isLastCircle ? 'last-circle' : ''}`}
+                className={`circle ${activeIds.has(id) ? 'active' : ''} ${isLastCircle ? 'last-circle' : ''} ${isLastCircle && showModal ? 'modal-open' : ''}`}
                 style={{
                   width: `${circleSize}px`,
                   height: `${circleSize}px`,
@@ -251,6 +257,7 @@ const CircleGrid = ({
                   ...customStyle,
                   cursor: isLastCircle ? 'pointer' : 'default',
                 }}
+                onClick={isLastCircle ? handleLastCircleClick : undefined}
               >
                 {isLastCircle ? (
                   // Show "i" when modal is closed, "×" when modal is open
@@ -273,7 +280,7 @@ const CircleGrid = ({
       
       {/* Modal - simple overlay without close button (now in the circle) */}
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)} />
+        <div className="modal-overlay" onClick={handleOverlayClick} />
       )}
     </>
   );
