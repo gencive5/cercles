@@ -66,39 +66,38 @@
 }
 
 /* Individual circle styling */
-#c33 { background: #ff6b6b; }
-#c34 { background: #4ecdc4; }
-#c35 { background: #0b7770; }
-#c36 { background: #119e30; }
-#c37 { background: #cd4eb1; }
+#c33 { background: #006016; }
+#c34 { background: #67cd4e; }
+#c35 { background: #b7cf01; }
+#c36 { background: #67cd4e; }
+#c37 { background: #006016; }
 
-#c43 { background: #ff6b6b; }
-#c44 { background: #4ecdc4; }
-#c45 { background: #0b7770; }
-#c46 { background: #119e30; }
-#c47 { background: #cd4eb1; }
+#c43 { background: #006016; }
+#c44 { background: #67cd4e; }
+#c45 { background: #b7cf01; }
+#c46 { background: #67cd4e; }
+#c47 { background: #006016; }
 
-#c48 { background: #ff6b6b; }
-#c49 { background: #ff6b6b; }
-#c50 { background: #ff6b6b; }
-#c51 { background: #ff6b6b; }
-#c52 { background: #ff6b6b; }
+#c48 { background: #2c02b5; }
+#c49 { background: #2c02b5; }
+#c50 { background: #2c02b5; }
+#c51 { background: #2c02b5; }
+#c52 { background: #2c02b5; }
 
-#c53 { background: #7a4ecd; }
+#c53 { background: #b7cf01; }
 
-#c59 { background: #cd7d4e; }
+#c59 { background: #e66013; }
 
-#c62 { background: #4e50cd; }
+#c62 { background: #000244; }
 
-#c67 { background: #4ecda7; }
-#c68 { background: #b44ecd; }
-#c69 { background: #cd4e4e; }
+#c67 { background: #892ede; }
+#c68 { background: #892ede; }
+#c69 { background: #892ede; }
 
-#c71 { background: #fff383; }
-#c82 { background: #4e50cd; }
-#c84 { background: #fcb3ff; }
-#c88 { background: #ff989e; }
+
 #c91 { background: #cd4e4e; }
+
+#c92 { background: #4ecda7; }
 
 #c109 { background: #7b48be; }
 #c110 { background: #4aa54e; }
@@ -139,8 +138,13 @@
   transform: skew(30deg, 20deg);
 }
 
-#c71:hover, #c82:hover, #c84:hover, #c88:hover, #c91:hover {
-  transform: skew(20deg, 30deg);
+/* fix rotation */
+#c91:hover {
+  transform: skew(30deg, 20deg);
+}
+
+#c92:hover {
+  transform: scale(0.7, 0.7);
 }
 
 #c109:hover, #c110:hover, #c111:hover {
