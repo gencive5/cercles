@@ -66,99 +66,212 @@
 }
 
 /* Individual circle styling */
-#c33 { background: #006016; }
-#c34 { background: #67cd4e; }
-#c35 { background: #b7cf01; }
-#c36 { background: #67cd4e; }
-#c37 { background: #006016; }
+#c57 { background: #006016; }
+#c58 { background: #67cd4e; }
+#c59 { background: #b7cf01; }
+#c60 { background: #67cd4e; }
+#c61 { background: #006016; }
 
-#c43 { background: #006016; }
-#c44 { background: #67cd4e; }
-#c45 { background: #b7cf01; }
-#c46 { background: #67cd4e; }
-#c47 { background: #006016; }
+#c63 { background: #006016; }
+#c64 { background: #67cd4e; }
+#c65 { background: #b7cf01; }
+#c66 { background: #67cd4e; }
+#c67 { background: #006016; }
 
-#c48 { background: #2c02b5; }
-#c49 { background: #2c02b5; }
-#c50 { background: #2c02b5; }
-#c51 { background: #2c02b5; }
-#c52 { background: #2c02b5; }
+#c68 { background: #2c02b5; }
+#c69 { background: #2c02b5; }
+#c70 { background: #2c02b5; }
+#c71 { background: #2c02b5; }
+#c72 { background: #2c02b5; }
 
-#c53 { background: #b7cf01; }
+#c73 { background: #b7cf01; }
 
-#c59 { background: #e66013; }
+#c81 { background: #e6139c; }
 
-#c62 { background: #000244; }
-
-#c67 { background: #892ede; }
-#c68 { background: #892ede; }
-#c69 { background: #892ede; }
-
-
-#c91 { background: #cd4e4e; }
+#c84 { background: #000244; }
 
 #c92 { background: #4ecda7; }
+#c93 { background: #4ecda7; }
+#c94 { background: #4ecda7; }
+#c95 { background: #4ecda7; }
+#c96 { background: #4ecda7; }
 
-#c109 { background: #7b48be; }
-#c110 { background: #4aa54e; }
-#c111 { background: #eb0bcd; }
+#c98 { background: #67cd4e; }
 
-#c130 { background: #4854be; }
-#c131 { background: #82a54a; }
-#c132 { background: #e7eb0b; }
+#c106 { background: #f06215; }
 
-#c144 { background: #0b74eb; }
+#c117 { background: #4ecda7; }
+#c118 { background: #000244; }
+#c119 { background: #000244; }
+#c120 { background: #000244; }
+#c121 { background: #4ecda7; }
+
+#c123 { background: #006016; }
+
+#c131 { background: #d11944; }
+
+#c134 { background: #294ec9; }
+
+#c142 { background: #4ecda7; }
+#c143 { background: #000244; }
+#c144 { background: #90f68e; }
+#c145 { background: #000244; }
+#c146 { background: #4ecda7; }
+
+#c148 { background: #2c02b5; }
+
+#c156 { background: #f06215; }
+
+#c160 { background: #892ede; }
+
+#c167 { background: #4ecda7; }
+#c168 { background: #000244; }
+#c169 { background: #000244; }
+#c170 { background: #000244; }
+#c171 { background: #4ecda7; }
+
+#c173 { background: #006016; }
+
+#c181 { background: #e6139c; }
+
+#c186 { background: #2c02b5; }
+
+#c192 { background: #4ecda7; }
+#c193 { background: #4ecda7; }
+#c194 { background: #4ecda7; }
+#c195 { background: #4ecda7; }
+#c196 { background: #4ecda7; }
+
+#c198 { background: #67cd4e; }
+
+#c203 { background: #f06215; }
+#c204 { background: #67cd4e; }
+
+#c212 { background: #892ede; }
+
+#c223 { background: #b7cf01; }
+
+#c228 { background: #67cd4e; }
+#c229 { background: #f06215; }
+
+#c236 { background: #2c02b5; }
+
+#c242 { background: #8b6e5a; }
+#c243 { background: #5e3122; }
+#c244 { background: #2c02b5; }
+#c245 { background: #5e3122; }
+#c246 { background: #8b6e5a; }
+
+#c260 { background: #892ede; }
+
+#c265 { background: #02576f; }
+#c266 { background: #22a4ae; } 
+#c267 { background: #892ede; }
+#c268 { background: #22a4ae; } 
+#c269 { background: #02576f; }
+#c270 { background: #22a4ae; } 
+#c271 { background: #892ede; }
+#c272 { background: #22a4ae; } 
+#c273 { background: #02576f; }
+
+#c286 { background: #2c02b5; }
+
+#c306 { background: #ffa365; }
+
+#c310 { background: #02576f; }
+#c311 { background: #22a4ae; } 
+#c312 { background: #892ede; }
+#c313 { background: #22a4ae; } 
+#c314 { background: #02576f; }
+
+#c340 { background: #e6139c; }
+#c341 { background: #f06215; }
+#c342 { background: #d11944; }
+#c343 { background: #f06215; }
+#c344 { background: #e6139c; }
+
+#c369 { background: #f06215; }
+
+#c394 { background: #d11944; }
+
+
 
 /* Hover effects */
-#c33:hover, #c37:hover, #c43:hover, #c47:hover {
+#c57:hover, #c61:hover, #c63:hover, #c67:hover, #c123:hover, #c173:hover { 
   transform: scale(0.9, 1.2);
 }
 
-#c34:hover, #c36:hover, #c44:hover, #c46:hover {
+#c58:hover, #c60:hover, #c64:hover, #c66:hover, #c98:hover, #c198:hover, #c57:hover, #c204:hover, #c228:hover, #c57:hover{  
   transform: scale(0.7, 1.2);
 }
 
-#c35:hover, #c45:hover, #c53:hover {
+#c59:hover {  jaune
   transform: scale(0.5, 1.2);
 }
 
-#c48:hover, #c49:hover, #c50:hover, #c51:hover, #c52:hover {
+#c68:hover {  bleu roi
   transform: scale(1.2, 1.2);
 }
 
-#c59:hover {
-  transform: scale(1.2, 0.8);
+#c81:hover {  magenta
+  transform: scale(1.2, 0.9);
 }
 
-#c62:hover {
+#c84:hover {  bleu foncé 
   transform: scale(0.5, 0.5);
 }
 
-#c67:hover, #c68:hover, #c69:hover {
-  transform: skew(30deg, 20deg);
-}
-
-/* fix rotation */
-#c91:hover {
-  transform: skew(30deg, 20deg);
-}
-
-#c92:hover {
+#c92:hover {   bleu
   transform: scale(0.7, 0.7);
 }
 
-#c109:hover, #c110:hover, #c111:hover {
-  transform: scale(0.5, 0.5);
+
+#c106:hover {  orange
+  transform: scale(1.2, 0.7);
 }
 
-#c130:hover, #c131:hover, #c132:hover {
+#c131:hover {  rouge 
   transform: scale(1.2, 0.4);
 }
 
-#c144:hover {
+#c134:hover {   indigo
+  transform: skew(-30deg, -20deg);
+}
+
+#c144:hover {  
+  border-radius: 0; 
+  transform: scale(0.4); 
+}
+
+#c160:hover { violet
+  transform: skew(30deg, 20deg);
+}
+
+
+
+#c242:hover { marron clair
+  transform: skew(-30deg, -1deg);
+}
+
+#c243:hover { marron foncé 
+  transform: skew(-30deg, -10deg);
+}
+
+
+#c265:hover{  bleu canard
+  transform: skew(30deg, 10deg);
+}
+
+#c266:hover{ vert d'eau
+  transform: skew(30deg, 1deg);
+}
+
+#c306:hover {
   border-radius: 0; 
   transform: scale(1.1); 
 }
+
+
 
 /* Touch effects for all circles */
 #c1.active, #c4.active, #c16.active, #c17.active {
@@ -211,10 +324,10 @@
 
 /* Style for the last circle - open state */
 .last-circle.modal-open {
-  background: #ff6600 !important; /* Orange/red color when open */
+  background: #ff6600 !important; 
 }
 
-/* Last circle hover effect */
+/* Last circle hover effect
 .last-circle:hover {
   transform: scale(1.1);
   box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
@@ -222,4 +335,4 @@
 
 .last-circle.modal-open:hover {
   box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
-}
+} */
