@@ -197,44 +197,54 @@
 
 
 /* Hover effects */
+
+/* dark green */
 #c57:hover, #c61:hover, #c63:hover, #c67:hover, #c123:hover, #c173:hover { 
   transform: scale(0.9, 1.2);
 }
 
+/* green */
 #c58:hover, #c60:hover, #c64:hover, #c66:hover, #c98:hover, #c198:hover, #c57:hover, #c204:hover, #c228:hover, #c57:hover{  
   transform: scale(0.7, 1.2);
 }
 
-#c59:hover {  jaune
+/* yellow */
+#c59:hover, #c65:hover, #c73:hover, #c223:hover{ 
   transform: scale(0.5, 1.2);
 }
 
-#c68:hover {  bleu roi
+/* bleu roi */
+#c68:hover, #c69:hover, #c70:hover, #c71:hover, #c72:hover, #c148:hover{  
   transform: scale(1.2, 1.2);
 }
 
-#c81:hover {  magenta
+/* magenta */
+#c81:hover, #c181:hover, #c340:hover, #c344:hover {  
   transform: scale(1.2, 0.9);
 }
 
-#c84:hover {  bleu foncé 
+/* bleu foncé  */
+#c84:hover, #c118:hover, #c119:hover, #c120:hover, #c143:hover, #c145:hover, #c168:hover, #c169:hover, #c170:hover  {  
   transform: scale(0.5, 0.5);
 }
 
-#c92:hover {   bleu
+/* bleu */
+#c92:hover, #c93:hover, #c94:hover, #c95:hover, #c96:hover, #c117:hover, #c121:hover, #c142:hover, #c146:hover, #c167:hover, #c171:hover, #c192:hover, #c193:hover, #c194:hover, #c195:hover, #c196:hover {   
   transform: scale(0.7, 0.7);
 }
 
-
-#c106:hover {  orange
+/* orange */
+#c106:hover, #c156:hover, #c203:hover, #c229:hover, #c341:hover, #c343:hover {  
   transform: scale(1.2, 0.7);
 }
 
-#c131:hover {  rouge 
+/* rouge  */
+#c131:hover, #c342:hover, #c394:hover {  
   transform: scale(1.2, 0.4);
 }
 
-#c134:hover {   indigo
+/* indigo */
+#c134:hover, #c186:hover, #c236:hover, #c244:hover, #c286:hover {   
   transform: skew(-30deg, -20deg);
 }
 
@@ -243,26 +253,29 @@
   transform: scale(0.4); 
 }
 
-#c160:hover { violet
+/* violet */
+#c160:hover, #c212:hover, #c260:hover, #c267:hover, #c271:hover, #c312:hover { 
   transform: skew(30deg, 20deg);
 }
 
 
-
-#c242:hover { marron clair
+/* marron clair */
+#c242:hover, #c246:hover { 
   transform: skew(-30deg, -1deg);
 }
 
-#c243:hover { marron foncé 
+ /* marron foncé */
+#c243:hover { 
   transform: skew(-30deg, -10deg);
 }
 
-
-#c265:hover{  bleu canard
+/* bleu canard */
+#c265:hover, #c269:hover, #c273:hover, #c310:hover, #c314:hover {  
   transform: skew(30deg, 10deg);
 }
 
-#c266:hover{ vert d'eau
+/* vert d'eau */
+#c266:hover, #c268:hover, #c270:hover, #c272:hover, #c311:hover, #c313:hover { 
   transform: skew(30deg, 1deg);
 }
 
