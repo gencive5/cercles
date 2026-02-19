@@ -18,21 +18,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'Seaweed';
-  src: url('/fonts/SeaweedSans-Regular.woff2') format('woff2'),
-       url('/fonts/SeaweedSans-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Sniglet';
-  src: url('/fonts/sniglet_regular-webfont.woff2') format('woff2'),
-       url('/fonts/sniglet_regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
 
 
 /* Ensure the container doesn't create extra scrollbars */

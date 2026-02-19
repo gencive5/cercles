@@ -28,7 +28,7 @@
   width: var(--circle-size);
   height: var(--circle-size);
   border-radius: 50%;
-  background: white;
+  background: rgb(48, 219, 156);
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
@@ -47,7 +47,7 @@
 .circle-letter {
   font-size: calc(var(--circle-size) * 0.4);
   font-weight: bold;
-  color: #000;
+  color: #291888;
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
   z-index: 2;
@@ -66,7 +66,7 @@
 }
 
 /* Individual circle styling */
-#c57 { background: #006016; }
+/* #c57 { background: #006016; }
 #c58 { background: #67cd4e; }
 #c59 { background: #b7cf01; }
 #c60 { background: #67cd4e; }
@@ -192,7 +192,7 @@
 
 #c369 { background: #f06215; }
 
-#c394 { background: #d11944; }
+#c394 { background: #d11944; } */
 
 
 
@@ -396,13 +396,13 @@
 
 /* Style for the last circle - closed state */
 .last-circle {
-  background: #ffcc00 !important; 
+  background: #ddee47 !important; 
   transition: all 0.3s ease;
 }
 
 /* Style for the last circle - open state */
 .last-circle.modal-open {
-  background: #ff6600 !important; 
+  background: #fb741a !important; 
 }
 
 /* Last circle hover effect
