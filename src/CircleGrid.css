@@ -51,7 +51,7 @@
   opacity: 0;
   animation: fadeIn 0.3s ease forwards;
   z-index: 2;
-  font-family: 'Breite', sans-serif;
+  font-family: 'Universalis', sans-serif;
 }
 
 /* Toggle icon specific styling */
@@ -66,7 +66,7 @@
 }
 
 /* Individual circle styling */
-/* #c57 { background: #006016; }
+#c57 { background: #006016; }
 #c58 { background: #67cd4e; }
 #c59 { background: #b7cf01; }
 #c60 { background: #67cd4e; }
@@ -192,7 +192,7 @@
 
 #c369 { background: #f06215; }
 
-#c394 { background: #d11944; } */
+#c394 { background: #d11944; }
 
 
 
