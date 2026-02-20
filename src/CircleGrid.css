@@ -313,7 +313,7 @@
 }
 
 /* bleu foncé  */
-#c84:hover, #c118:hover, #c119:hover, #c120:hover, #c143:hover, #c145:hover, #c168:hover, #c169:hover, #c170:hover  {  
+#c84.active, #c118.active, #c119.active, #c120.active, #c143.active, #c145.active, #c168.active, #c169.active, #c170.active  {  
   transform: scale(0.5, 0.5);
 }
 

@@ -9,7 +9,7 @@ const CircleGrid = ({
   gapRatio = 0.2,
   circleStyle = {},
   customCircles = {}, // e.g. { c3: { style: {...}, linger: 600 } }
-  lingerMs = 1200,     // default linger time (ms)
+  lingerMs = 30000,     // Changed default to 30 seconds (30000ms)
   modalContent = "Inspired from Betelgeuse from the portfolio Cinétique III, 1959 - Victor Vasarely", // Content for the modal
 }) => {
   const gridRef = useRef(null);
@@ -136,6 +136,19 @@ const CircleGrid = ({
     setShowModal(!showModal);
   };
 
+  // --- Desktop hover handlers ---
+  const handleMouseEnter = (id) => {
+    if (id === lastCircleId) return;
+    
+    clearScheduled(id);
+    addActive(id);
+  };
+
+  const handleMouseLeave = (id) => {
+    // Schedule removal after 30 seconds (or custom linger time)
+    scheduleRemove(id, getLinger(id));
+  };
+
   // --- touch handlers ---
   const handleTouchStart = (e) => {
     const touch = e.touches && e.touches[0];
@@ -199,7 +212,7 @@ const CircleGrid = ({
     }
   };
 
-  // Handle click (for desktop)
+  // Handle click (for desktop on last circle)
   const handleClick = (e) => {
     if (e.target.id === lastCircleId) {
       handleLastCircleClick(e);
@@ -257,6 +270,8 @@ const CircleGrid = ({
                   ...customStyle,
                   cursor: isLastCircle ? 'pointer' : 'default',
                 }}
+                onMouseEnter={() => !isLastCircle && handleMouseEnter(id)}
+                onMouseLeave={() => !isLastCircle && handleMouseLeave(id)}
                 onClick={isLastCircle ? handleLastCircleClick : undefined}
               >
                 {isLastCircle ? (
